@@ -13,14 +13,20 @@
 
 	<body>
 		<header>
+			<img src="world.png" alt="Image of the world">
 			<h1>World Database Lookup</h1>
 		</header>
 
 		<main>
 			<div id="controls">
-				<label for="country">Country:</label>
-				<input id="country" type="search" name="country" placeholder="Enter country name" />
-				<button id="lookup">Lookup</button>
+				<div id = "country-form">
+					<label for="country">Country:</label>
+					<input id="country" type="search" name="country" placeholder="Enter country name" />
+				</div>
+				<div id = "buttons">
+					<br> <button id ="lookup">Lookup</button>
+					<!--<button id="lookupci">Lookup Cities</button>-->
+				</div>
 			</div>
 			
 			<div id="result">
