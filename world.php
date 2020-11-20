@@ -7,46 +7,43 @@ $dbname = 'world';
 
 $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
 //$stmt = $conn->query("SELECT * FROM countries WHERE name LIKE '%$country%'");
-$stmt = $conn->query("SELECT * FROM countries");
+$stmt = $conn->query("SELECT * FROM cities");
+
 
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<?php //if(isset($GET['country'])) {
-        //echo $_GET['country'];
-        //echo htmlentities($results['country']);
+<?php if(isset($GET['cities'])) {
+        echo $_GET['cities'];
       }
 ?>
 
-<?php //$query = filter_input(INPUT_GET, "query", FILTER_SANITIZE_STRING); ?>
+<?php 
+  $contextfound = (isset($_GET['context']));
+  if($contextfound) {
+    echo $_GET['context'];
+  }
+?>
+
+<?php $query = filter_input(INPUT_GET, "query", FILTER_SANITIZE_STRING); ?>
 
 
 <table>
   <tr>
     <th>Name</th>
-    <th>Continent</th>
-    <th>Independence Year</th>
-    <th>Head of State</th>
-  </tr>";
+    <th>District</th>
+    <th>Population</th>
+  </tr>
 
 <?php
 foreach($results as $row):
-  echo "<tr><td>".$row['name']."</td>;
-  echo "<tr><td>".$row['continent']."</td>;
-  echo "<tr><td>".$row['independence_year']."</td>;
-  echo "<tr><td>".$row['head_of_state']."</td>;
+  echo "<tr><td>".$row['name']."</td><td>".$row['district']."</td><td>".$row['population']."</td></tr>";
 ?>
+<?php endforeach; ?>
 </table>
 
-
-
-
-
-<?php
-/*
 <ul>
 <?php foreach ($results as $row): ?>
-  <li><?= $row['name'] . ' is ruled by ' . $row['head_of_state']; ?></li>
+  <li> <?php $row['name'] . ' is ruled by ' . $row['head_of_state']; ?> </li>
 <?php endforeach; ?>
-</ul>*/
-?>
+</ul>

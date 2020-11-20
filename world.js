@@ -1,16 +1,35 @@
 document.addEventListener('DOMContentLoaded', () => {
-    var lookUp = document.getElementById('lookup');
+    var lookUpCo = document.getElementById('lookupco');
+    var lookUpCi = document.getElementById('lookupci');
     //var countryName = document.getElementById('country').value;
 
     const results = document.getElementById('result');
 
-    lookUp.addEventListener("click", dosomething);
+    lookUpCo.addEventListener("click", searchCountries);
 
-    function dosomething(e) {
+    function searchCountries(e) {
         e.preventDefault();
         
         var httpRequest = new XMLHttpRequest();
         var url = "world.php";
+        httpRequest.onreadystatechange = function () {
+            if(httpRequest.readyState === XMLHttpRequest.DONE) {
+                if(httpRequest.status === 200) {
+                    var response = JSON.parse(httpRequest.responseText);
+                    results.innerText = response;
+                }
+            }
+        }
+
+        httpRequest.open('GET', url, true);
+        httpRequest.send();
+    }
+
+    lookUpCi.addEventListener("click", searchCitites);
+
+    function searchCitites() {
+        var httpRequest = new XMLHttpRequest();
+        var url = "world.php?country=Jamaica&context=citites";
         httpRequest.onreadystatechange = function () {
             if(httpRequest.readyState === XMLHttpRequest.DONE) {
                 if(httpRequest.status === 200) {
